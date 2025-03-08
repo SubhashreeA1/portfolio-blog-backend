@@ -11,6 +11,9 @@ app.use(express.json()); // Parse JSON requests
 app.use(cors()); // Enable CORS
 
 // Import Routes
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+
 const blogRoutes = require("./routes/blogRoutes");
 
 // Test if .env is loading correctly
@@ -21,13 +24,10 @@ if (!process.env.MONGO_URI) {
 
 // Connect to MongoDB Atlas
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB Connected Successfully!"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
-
+  .catch((err) => console.log("❌ Database connection error:", error));
+  
 // Test Route
 app.get("/", (req, res) => {
   res.send("Portfolio Blog API is running...");
