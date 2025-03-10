@@ -16,6 +16,10 @@ app.use("/api/auth", authRoutes);
 
 const blogRoutes = require("./routes/blogRoutes");
 
+const contactRoutes = require("./routes/contactRoutes");
+app.use("/api/contact", contactRoutes);
+
+
 // Test if .env is loading correctly
 if (!process.env.MONGO_URI) {
   console.error("❌ MONGO_URI is not defined in .env file");
@@ -35,6 +39,7 @@ app.get("/", (req, res) => {
 
 // Blog Routes
 app.use("/api/blogs", blogRoutes);
+
 
 // Start Server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
